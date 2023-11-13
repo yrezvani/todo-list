@@ -1,0 +1,1 @@
+(()=>{const t=function(t,o,e,i,n,s){return{title:t,description:o,dueDate:e,priority:i,notes:n,completed:s}},o=t("first","I have to go home",new Date,1,"This is the first to do I'm creating",!1),e=t("second","doing laundry",new Date,2,"my note",!0),i={title:"proj1",todos:[]};i.todos.push(o,e),console.log(i.todos.findIndex((t=>"first"===t.title)))})();

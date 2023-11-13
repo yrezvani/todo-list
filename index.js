@@ -1,0 +1,2 @@
+(()=>{const t=function(t,o,e,n,i,d){return{title:t,description:o,dueDate:e,priority:n,notes:i,completed:d}},o=t("first","I have to go home",new Date,1,"This is the first to do I'm creating",!1),e=t("second","doing laundry",new Date,2,"my note",!0),n={title:"proj1",todos:[]};n.todos.push(o,e),function(){const t=document.querySelector(".add-task"),o=document.querySelector("dialog");t.addEventListener("click",(function(){o.showModal()}))}(),console.log(n.todos.findIndex((t=>"first"===t.title)))})();
+//# sourceMappingURL=index.js.map
