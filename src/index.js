@@ -51,7 +51,8 @@ const addTask = function () {
     const modal = document.querySelector('dialog');
     taskForm.addEventListener('submit', function (e) {
         e.preventDefault();
-        activeProject().todos.push(createTodo());
+        // activeProject().todos.push(createTodo());
+        console.log(activeProject().todos);
         renderTask();
         modal.close();
     });
@@ -64,21 +65,19 @@ const renderTask = function () {
     const dueDate = document.querySelector('#due-date').value.toString();
     const priority = document.querySelector('#priority').value;
     const completed = document.querySelector('#completed').checked;
-    if (title !== '') {
-        container.innerHTML = '';
-        console.log(activeProject().todos);
-        for (const todo of activeProject().todos) {
-            const div = document.createElement('div');
-            div.classList.add('task');
-            container.append(div);
-            div.innerHTML = `<div class="title">${todo.title}</div>
-            <div class="description">${todo.description}</div>
-            <div class="date">${todo.dueDate}</div>
-            <div class="priority">${todo.priority}</div>
-            <div class="completed">${todo.completed ? 'Completed' : 'Not Completed'}</div>
-            <i class="fa-solid fa-pencil"></i>
-            <i class="fa-solid fa-trash"></i>`;
-        }
+    container.innerHTML = '';
+    console.log(activeProject().todos);
+    for (const todo of activeProject().todos) {
+        const div = document.createElement('div');
+        div.classList.add('task');
+        container.append(div);
+        div.innerHTML = `<div class="title">${todo.title}</div>
+        <div class="description">${todo.description}</div>
+        <div class="date">${todo.dueDate}</div>
+        <div class="priority">${todo.priority}</div>
+        <div class="completed">${todo.completed ? 'Completed' : 'Not Completed'}</div>
+        <i class="fa-solid fa-pencil"></i>
+        <i class="fa-solid fa-trash"></i>`;
     }
 };
 
