@@ -206,7 +206,7 @@ input[type='checkbox'] {
 }
 
 .complete {
-    background: url(../images/tick2.png) no-repeat;
+    background: url(./assets/images/tick2.png) no-repeat;
     background-size: cover;
 }
 
@@ -229,8 +229,14 @@ input[type='checkbox'] {
     min-width: 20rem;
     max-width: 25rem;
     border-radius: 10px;
+    line-height: 1.5;
 }
 
 .close-details {
     text-align: right;
+}
+
+h4 {
+    display: inline-block;
+    margin-right: 0.7rem;
 }

@@ -22,11 +22,13 @@
                         </div>
                     </div>
                 </div>
-                <form action="" class="new-proj-form">
+                <form action="" class="new-proj-form" id="proj-form">
                     <div class="form-container">
                         <label for="project-title">Project Title</label>
                         <input type="text" id="project-title" name="project-title" />
-                        <button type="submit" id="submit">Submit</button>
+                        <div>
+                            <button type="submit" id="submit" form="proj-form">Create</button>
+                        </div>
                     </div>
                 </form>
             </div>
@@ -34,15 +36,19 @@
                 <h1 class="title">Todo List</h1>
                 <div class="separator"></div>
                 <div class="proj-container">
-                    <h2>Project Name</h2>
+                    <h2 class="proj-name">Project Name</h2>
                     <h3>List of Tasks</h3>
                     <div class="task-container">
                         <div class="task">
-                            <div class="title">task 1</div>
-                            <div class="date">22 Feb</div>
-                            <div class="completed">Not completed</div>
-                            <i class="fa-solid fa-pencil"></i>
-                            <i class="fa-solid fa-trash"></i>
+                            <div>
+                                <div class="incomplete complete hover"></div>
+                                <div class="title">task 1</div>
+                            </div>
+                            <div>
+                                <button class="details hover">DETAILS</button>
+                                <i class="fa-solid fa-pencil hover"></i>
+                                <i class="fa-solid fa-trash hover"></i>
+                            </div>
                         </div>
                     </div>
                     <div class="add-task">
@@ -52,7 +58,7 @@
                     </div>
                 </div>
             </div>
-            <dialog>
+            <dialog id="task-dialog">
                 <form class="task-form" action="">
                     <h3>Add new task</h3>
                     <div>
@@ -83,6 +89,41 @@
                     <div>
                         <label for="completed">Completed</label>
                         <input type="checkbox" id="completed" name="completed" value="false" />
+                    </div>
+                    <button type="submit" id="task-submit" name="task-submit">Submit</button>
+                </form>
+            </dialog>
+            <dialog id="edit-dialog">
+                <form class="edit-form" action="">
+                    <h3>Add new task</h3>
+                    <div>
+                        <input type="text" id="edit-title" name="edit-title" placeholder="Title" required />
+                    </div>
+                    <div>
+                        <textarea
+                            name="edit-description"
+                            id="edit-description"
+                            cols="30"
+                            rows="10"
+                            placeholder="Description"
+                            required
+                        ></textarea>
+                    </div>
+                    <div>
+                        <label for="edit-due-date">Due date</label>
+                        <input type="date" id="edit-due-date" name="edit-due-date" placeholder="Due date" required />
+                    </div>
+                    <div>
+                        <label for="edit-priority">Priority</label>
+                        <select id="edit-priority" name="edit-priority" required>
+                            <option value="High">High</option>
+                            <option value="Medium">Medium</option>
+                            <option value="Low">Low</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="edit-completed">Completed</label>
+                        <input type="checkbox" id="edit-completed" name="edit-completed" value="false" />
                     </div>
                     <button type="submit" id="task-submit" name="task-submit">Submit</button>
                 </form>
