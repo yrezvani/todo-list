@@ -13,42 +13,38 @@ const createTodo = function (title, description, dueDate, priority, completed) {
 
 const addDummyTask = function () {
     const container = document.querySelector('.task-container');
-    if (activeProject().todos.length === 0 && container.innerHTML === '') {
-        const div = document.createElement('div');
-        div.classList.add('task');
-        container.append(div);
-        div.innerHTML = `<div>
-            <div class="incomplete hover"></div>
-            <div class="title">Sample</div>
-            </div>
-            <div>
-            <button class="details hover" data-detail="dummy">DETAILS</button>
-            <i class="fa-solid fa-pencil hover" data-edit="dummy"></i>
-            <i class="fa-solid fa-trash hover" data-task="dummy"></i>
-            </div>`;
-        // <i class="fa-solid fa-pencil"></i>
-        // <i class="fa-solid fa-trash"></i>`;
+    if (activeProject().todos.length === 0) {
+        const sample = createTodo('Create pseudocode', 'none', new Date().toISOString().split('T')[0], 'high', false);
+        activeProject().todos.push(sample);
+        renderTask();
     }
 };
 
 const renderTask = function () {
     const container = document.querySelector('.task-container');
     container.innerHTML = '';
-    addDummyTask();
-    for (const [index, todo] of activeProject().todos.entries()) {
-        console.log(todo.completed);
-        const div = document.createElement('div');
-        div.classList.add('task');
-        container.append(div);
-        div.innerHTML = `<div>
-            <div class="${todo.completed ? 'complete' : 'incomplete'} hover"></div>
-            <div class="title">${todo.title}</div>
-            </div>
-            <div>
-            <button class="details hover" data-detail="${index}">DETAILS</button>
-            <i class="fa-solid fa-pencil hover" data-edit="${index}"></i>
-            <i class="fa-solid fa-trash hover" data-task="${index}"></i>
-            </div>`;
+    console.log(projects);
+    const taskList = document.querySelector('.task-list');
+    if (activeProject().todos.length === 0) taskList.textContent = 'No tasks to display';
+    else {
+        taskList.textContent = 'List of Tasks';
+        const projTitle = document.querySelector('.proj-name');
+        projTitle.textContent = activeProject().title;
+        console.log(activeProject().todos);
+        for (const [index, todo] of activeProject().todos.entries()) {
+            const div = document.createElement('div');
+            div.classList.add('task');
+            container.append(div);
+            div.innerHTML = `<div>
+                <div class="${todo.completed ? 'complete' : 'incomplete'} hover" data-completed="${index}"></div>
+                <div class="title" ${todo.completed ? 'style="text-decoration: line-through"' : ''}>${todo.title}</div>
+                </div>
+                <div>
+                <button class="details hover" data-detail="${index}">DETAILS</button>
+                <i class="fa-solid fa-pencil hover" data-edit="${index}"></i>
+                <i class="fa-solid fa-trash hover" data-task="${index}"></i>
+                </div>`;
+        }
     }
 };
 
@@ -66,6 +62,7 @@ const taskForm = function () {
         localStorage.setItem('myProjects', JSON.stringify(projects));
         renderTask();
         modal.close();
+        console.log(dueDate);
     });
 };
 
@@ -78,6 +75,7 @@ const taskOpBtns = function () {
         if (element.classList.contains('fa-trash')) {
             const taskIndex = element.dataset.task;
             activeProject().todos.splice(taskIndex, 1);
+            localStorage.setItem('myProjects', JSON.stringify(projects));
             renderTask();
         } else if (element.classList.contains('fa-pencil')) {
             activeTask = element.dataset.edit;
@@ -95,11 +93,20 @@ const taskOpBtns = function () {
             detailsWindow.classList.add('task-details');
             mainApp.append(detailsWindow);
             const todoIndex = element.dataset.detail;
+            const todo = activeProject().todos[todoIndex];
             detailsWindow.innerHTML = `<div class="close-details">x</div>
-                <div><h4>Title:</h4>${activeProject().todos[todoIndex].title}</div>
-                <div><h4>Priority:</h4>${activeProject().todos[todoIndex].priority}</div>
-                <div><h4>Due Date:</h4>${activeProject().todos[todoIndex].dueDate}</div>
-                <div><h4>Description:</h4>${activeProject().todos[todoIndex].description}</div>`;
+                <div><h4>Title:</h4>${todo.title}</div>
+                <div><h4>Priority:</h4>${todo.priority}</div>
+                <div><h4>Due Date:</h4>${todo.dueDate}</div>
+                <div><h4>Description:</h4>${todo.description}</div>`;
+        } else if (element.classList.contains('incomplete') || element.classList.contains('complete')) {
+            const todoIndex = element.dataset.completed;
+            const todo = activeProject().todos[todoIndex];
+            if (todo.completed) todo.completed = false;
+            else todo.completed = true;
+            // todo.completed ? (todo.completed = false) : (todo.completed = true);
+            localStorage.setItem('myProjects', JSON.stringify(projects));
+            renderTask();
         }
     });
 };
@@ -127,6 +134,7 @@ const editForm = function () {
         activeTask.priority = document.querySelector('select#edit-priority').value;
         activeTask.completed = document.querySelector('input#edit-completed').value;
         activeTask.active = false;
+        localStorage.setItem('myProjects', JSON.stringify(projects));
         modal.close();
         renderTask();
     });

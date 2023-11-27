@@ -26,6 +26,7 @@ const newProjectBtn = function () {
         const projectTitle = document.querySelector('#project-title').value;
         if (projectTitle !== '') {
             activeProject().active = false;
+
             const newProj = createProject(projectTitle);
             projects.push(newProj);
             localStorage.setItem('myProjects', JSON.stringify(projects));
@@ -51,8 +52,15 @@ const projectsListener = function () {
     });
 };
 
+const addDummyProject = function () {
+    if (projects.length === 0) {
+        const proj1 = createProject('Sample');
+        projects.push(proj1);
+    }
+};
+
 const activeProject = function () {
     return projects[projects.findIndex(x => x.active === true)];
 };
 
-export {projects, createProject, renderProjects, newProjectBtn, projectsListener, activeProject};
+export {projects, createProject, renderProjects, newProjectBtn, projectsListener, activeProject, addDummyProject};

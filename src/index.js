@@ -1,4 +1,12 @@
-import {projects, createProject, renderProjects, newProjectBtn, projectsListener, activeProject} from './project';
+import {
+    projects,
+    createProject,
+    renderProjects,
+    newProjectBtn,
+    projectsListener,
+    activeProject,
+    addDummyProject,
+} from './project';
 
 import {addDummyTask, renderTask, taskForm, taskOpBtns, editForm, addTaskBtn, closeDetails} from './task';
 
@@ -10,15 +18,12 @@ import {addDummyTask, renderTask, taskForm, taskOpBtns, editForm, addTaskBtn, cl
 //     priority: 'High',
 //     completed: 'false',
 // };
-if (projects.length === 0) {
-    const proj1 = createProject('Sample');
-    projects.push(proj1);
-}
+
 // proj1.todos.push(task1);
 
 // const proj2 = createProject('proj2');
 // projects.push(proj2);
-
+addDummyProject();
 taskOpBtns();
 taskForm();
 renderTask();
