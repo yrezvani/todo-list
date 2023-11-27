@@ -9,13 +9,13 @@ const createProject = function (title) {
 const renderProjects = function () {
     const projContainer = document.querySelector('.projects');
     projContainer.innerHTML = '';
-    for (const project of projects) {
+    for (const [index, project] of projects.entries()) {
         const div = document.createElement('div');
         projContainer.append(div);
         div.classList.add('project');
         div.innerHTML = `${project.title}<div>
             <button class="proj-delete">Delete</button>
-            <button class="proj-rename">Rename</button></div>`;
+            <button class="rename" data-rename="${index}">Rename</button></div>`;
     }
 };
 
@@ -40,15 +40,44 @@ const newProjectBtn = function () {
 const projectsListener = function () {
     const projectsCont = document.querySelector('.projects');
     projectsCont.addEventListener('click', function (e) {
-        if (e.target.classList.contains('project')) {
+        const element = e.target;
+        if (element.classList.contains('project')) {
             projects[projects.findIndex(x => x.active === true)].active = false;
-            projects[projects.findIndex(x => x.title === e.target.firstChild.textContent)].active = true;
+            projects[projects.findIndex(x => x.title === element.firstChild.textContent)].active = true;
             renderTask();
         }
-        if (e.target.classList.contains('proj-delete')) {
-            projects.splice(e.target.closest('.project').firstChild.textContent, 1);
+        if (element.classList.contains('proj-delete')) {
+            projects.splice(element.closest('.project').firstChild.textContent, 1);
             renderProjects();
+            renderTask();
         }
+        if (element.classList.contains('rename')) {
+            activeProject().active = false;
+            const projIndex = element.dataset.rename;
+            const project = projects[projIndex];
+            project.active = true;
+            const form = document.querySelector('.proj-rename');
+            form.classList.remove('hide');
+            document.querySelector('input#proj-rename').value = project.title;
+            // const div = document.createElement('div');
+            // wrapper.append(div);
+            // div.innerHTML = `<form action="" class="proj-rename">
+            //     <input type="text" id="proj-rename" name="proj-name" value="${project.title}"/>
+            //     <button type="submit" id="proj-rename">Rename</button>
+            //     </form>`;
+            // renderProjects();
+        }
+    });
+};
+
+const projRename = function () {
+    const form = document.querySelector('form.proj-rename');
+    form.addEventListener('submit', e => {
+        e.preventDefault();
+        form.classList.add('hide');
+        activeProject().title = document.querySelector('input#proj-rename').value;
+        localStorage.setItem('myProjects', JSON.stringify(projects));
+        renderProjects();
     });
 };
 
@@ -63,4 +92,13 @@ const activeProject = function () {
     return projects[projects.findIndex(x => x.active === true)];
 };
 
-export {projects, createProject, renderProjects, newProjectBtn, projectsListener, activeProject, addDummyProject};
+export {
+    projects,
+    createProject,
+    renderProjects,
+    newProjectBtn,
+    projectsListener,
+    activeProject,
+    addDummyProject,
+    projRename,
+};

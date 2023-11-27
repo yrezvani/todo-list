@@ -6,6 +6,7 @@ import {
     projectsListener,
     activeProject,
     addDummyProject,
+    projRename,
 } from './project';
 
 import {addDummyTask, renderTask, taskForm, taskOpBtns, editForm, addTaskBtn, closeDetails} from './task';
@@ -33,6 +34,7 @@ closeDetails();
 // console.log(proj1.todos.findIndex(x => x.title === 'first'));
 
 projectsListener();
+projRename();
 newProjectBtn();
 renderProjects();
 addDummyTask();

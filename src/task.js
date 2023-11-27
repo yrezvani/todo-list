@@ -14,7 +14,7 @@ const createTodo = function (title, description, dueDate, priority, completed) {
 const addDummyTask = function () {
     const container = document.querySelector('.task-container');
     if (activeProject().todos.length === 0) {
-        const sample = createTodo('Create pseudocode', 'none', new Date().toISOString().split('T')[0], 'high', false);
+        const sample = createTodo('Create pseudocode', 'none', new Date().toISOString().split('T')[0], 'High', false);
         activeProject().todos.push(sample);
         renderTask();
     }
