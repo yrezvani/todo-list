@@ -1,21 +1,22 @@
-@font-face {
-    font-family: 'Inter';
-    src: url(../fonts/Inter-Regular.woff);
-}
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-html,
-body {
+html {
     height: 100%;
+    background-color: #e3ca89;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 body {
-    background-color: rgb(209, 208, 208);
+    width: 80%;
+    height: 90%;
     font-family: 'Inter';
+    border-radius: 10px;
 }
 
 .wrapper {
@@ -23,14 +24,20 @@ body {
     height: 100%;
 }
 
+button {
+    background-color: #9e6e6e;
+}
+
 /* left panel */
 .left {
     height: 100%;
-    background-color: aqua;
+    background-color: rgba(57, 57, 57, 0.1);
     display: block;
     padding: 1rem;
     overflow-y: auto;
     width: 40%;
+    max-width: 360px;
+    border-radius: 10px;
 }
 
 .left h3 {
@@ -42,42 +49,44 @@ body {
     display: flex;
     justify-content: space-between;
     border-radius: 5px;
+    margin-bottom: 5px;
 }
 
 .project:hover {
-    border-radius: 10px;
-    background-color: greenyellow;
+    box-shadow: 7px 7px 10px -6px rgba(0, 0, 0, 0.75);
+    cursor: pointer;
 }
-
 .project button {
     border-radius: 4px;
 }
 
-.proj-delete {
-    background-color: #d83434;
-    color: white;
+.proj-delete:hover {
+    background-color: #f45555;
 }
 
-.new-proj-form {
-    margin-top: 1rem;
+.add-project {
+    margin-top: 2rem;
+    width: 70%;
 }
 
-.form-container {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    align-items: baseline;
+.add-project h5 {
+    text-align: start;
+    font-size: 1rem;
+    font-weight: 600;
 }
 
-.form-container div {
-    display: block;
-    margin-top: 0.4rem;
+.add-project:hover {
+    background-color: rgba(87, 87, 87, 0.1);
+    transform: scale(1.1);
+    border-radius: 5px;
+    margin-left: 1rem;
+    cursor: pointer;
 }
 
 .left input {
     padding: 0.2rem;
     margin-top: 0.3rem;
-    background-color: light gray;
+    background-color: #b48565;
     border-radius: 5px;
 }
 
@@ -85,14 +94,16 @@ form button {
     display: block;
     padding: 0.2rem 0.5rem;
     font-weight: 700;
-    background-color: #110f74;
-    color: white;
     border-radius: 4px;
 }
 /* main panel */
 .main {
     width: 100%;
+    max-width: 700px;
     position: relative;
+    background-color: rgba(57, 57, 57, 0.1);
+    border-radius: 10px;
+    margin-left: 5px;
 }
 
 h1 {
@@ -131,28 +142,33 @@ h2 {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1rem;
+    padding: 0.5rem 1rem;
     margin: 0.3rem 0.3rem;
-    background-color: blue;
+    background-color: #b48565;
     border-radius: 8px;
 }
 
+.task:hover {
+    box-shadow: 11px 11px 23px -6px rgba(0, 0, 0, 0.75);
+    cursor: pointer;
+}
 .add-task {
     margin: 1rem;
-    width: 60%;
+    width: 20%;
 }
 
-.add-task h3 {
+.add-task h5 {
     text-align: start;
     font-size: 1rem;
     font-weight: 600;
 }
 
 .add-task:hover {
-    background-color: white;
+    background-color: rgba(87, 87, 87, 0.1);
     transform: scale(1.1);
     border-radius: 5px;
     margin-left: 2rem;
+    cursor: pointer;
 }
 
 /* add task modal */
@@ -162,7 +178,7 @@ dialog {
     top: 50%;
     left: 50%;
     border-radius: 10px;
-    background-color: beige;
+    background-color: #decb9a;
     padding: 2rem;
     box-shadow: 11px 11px 23px -6px rgba(0, 0, 0, 0.75);
 }
@@ -192,8 +208,9 @@ input[type='checkbox'] {
     margin: 0 7px;
 }
 
-.hover:hover {
+.hover:not(.details):hover {
     transform: scale(1.2);
+    cursor: pointer;
 }
 
 .details {
@@ -203,7 +220,8 @@ input[type='checkbox'] {
 }
 
 .details:hover {
-    background-color: #12f06a;
+    background-color: #aef3c9;
+    cursor: pointer;
 }
 
 .complete {
@@ -226,7 +244,7 @@ input[type='checkbox'] {
     top: 50%;
     left: 50%;
     padding: 2rem;
-    background-color: rgba(128, 128, 128, 0.7);
+    background-color: #decb9a;
     min-width: 20rem;
     max-width: 25rem;
     border-radius: 10px;
@@ -235,6 +253,11 @@ input[type='checkbox'] {
 
 .close-details {
     text-align: right;
+    font-size: 1.3rem;
+}
+
+.close-details:hover {
+    cursor: pointer;
 }
 
 h4 {
@@ -242,7 +265,7 @@ h4 {
     margin-right: 0.7rem;
 }
 
-.proj-rename {
+form.proj-rename {
     position: absolute;
     transform: translate(-50%, -50%);
     top: 50%;
@@ -266,3 +289,8 @@ h4 {
 .proj-rename button {
     width: max-content;
 }
+
+/* .left,
+.main {
+    filter: blur(10px);
+} */
