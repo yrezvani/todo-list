@@ -1,9 +1,9 @@
-import {renderProjects, addDummyProject, createProjectListeners} from './project';
+import {renderProjects, addDummyProject, setProjectListeners} from './project';
 
-import {renderTasks, createTaskListeners} from './task';
+import {renderTasks, setTaskListeners} from './task';
 
 addDummyProject();
 renderTasks();
-createProjectListeners();
-createTaskListeners();
+setProjectListeners();
+setTaskListeners();
 renderProjects();

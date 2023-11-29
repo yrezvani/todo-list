@@ -225,7 +225,7 @@ input[type='checkbox'] {
 }
 
 .complete {
-    background: url(./assets/images/tick2.png) no-repeat;
+    background: url(./images/tick.png) no-repeat;
     background-size: cover;
 }
 
@@ -289,8 +289,3 @@ form.proj-rename {
 .proj-rename button {
     width: max-content;
 }
-
-/* .left,
-.main {
-    filter: blur(10px);
-} */

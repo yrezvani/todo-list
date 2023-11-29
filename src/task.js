@@ -20,7 +20,6 @@ const renderTasks = function () {
         projTitle.textContent = 'No projects to display';
         taskList.classList.add('hide');
     } else if (activeProject().todos.length === 0) {
-        // if (projects.length === 1) projects[0].active = true;
         taskList.textContent = 'No tasks to display';
         projTitle.textContent = activeProject().title;
     } else {
@@ -44,7 +43,7 @@ const renderTasks = function () {
     }
 };
 
-const createTaskListeners = function () {
+const setTaskListeners = function () {
     const taskForm = document.querySelector('.task-form');
     const editForm = document.querySelector('.edit-form');
     const tasks = document.querySelector('.task-container');
@@ -80,8 +79,6 @@ const createTask = function (e) {
     renderTasks();
     modal.close();
 };
-
-let activeTask;
 
 const taskOperations = function (e) {
     const element = e.target;
@@ -142,7 +139,7 @@ const closeDetails = function (e) {
 const editTask = function (e) {
     e.preventDefault();
     const modal = document.querySelector('#edit-dialog');
-    activeTask = activeProject().todos[activeProject().todos.findIndex(x => x.active === true)];
+    const activeTask = activeProject().todos[activeProject().todos.findIndex(x => x.active === true)];
     activeTask.title = document.querySelector('input#edit-title').value;
     activeTask.description = document.querySelector('textarea#edit-description').value;
     activeTask.dueDate = document.querySelector('input#edit-due-date').value;
@@ -160,4 +157,4 @@ const addTask = function (e) {
     else alert('Please add a project first');
 };
 
-export {createTodo, renderTasks, createTaskListeners};
+export {createTodo, renderTasks, setTaskListeners};

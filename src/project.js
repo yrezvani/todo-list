@@ -19,7 +19,7 @@ const renderProjects = function () {
     }
 };
 
-const createProjectListeners = function () {
+const setProjectListeners = function () {
     const addBtn = document.querySelector('.add-project');
     const projForm = document.querySelector('.new-proj-form');
     const projects = document.querySelector('.projects');
@@ -107,4 +107,4 @@ const activeProject = function () {
     return projects[projects.findIndex(x => x.active === true)];
 };
 
-export {projects, createProject, renderProjects, activeProject, addDummyProject, createProjectListeners};
+export {projects, createProject, renderProjects, activeProject, addDummyProject, setProjectListeners};
